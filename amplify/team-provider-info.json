@@ -12,9 +12,6 @@
       "AmplifyAppId": "d3erwqq9qelccz"
     },
     "categories": {
-      "auth": {
-        "packbrain": {}
-      },
       "hosting": {
         "amplifyhosting": {
           "appId": "d3erwqq9qelccz",
