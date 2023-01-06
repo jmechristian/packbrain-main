@@ -17,6 +17,9 @@
           "appId": "d3erwqq9qelccz",
           "type": "cicd"
         }
+      },
+      "auth": {
+        "packbrain": {}
       }
     }
   }
