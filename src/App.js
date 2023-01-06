@@ -1,7 +1,18 @@
 import React from 'react';
+import { Amplify } from 'aws-amplify';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
 
-const App = () => {
-  return <div className='text-7xl font-bold'>Hello World!</div>;
-};
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
 
-export default App;
+function App({ signOut, user }) {
+  return (
+    <>
+      <h1>Hello {user.username}</h1>
+      <button onClick={signOut}>Sign out</button>
+    </>
+  );
+}
+
+export default withAuthenticator(App);
