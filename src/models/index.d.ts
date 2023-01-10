@@ -6,6 +6,11 @@ export enum ModuleType {
   MICROLESSON = "MICROLESSON"
 }
 
+export declare class RegistrationCode {
+  readonly code?: string | null;
+  constructor(init: ModelInit<RegistrationCode>);
+}
+
 export declare class LessonSource {
   readonly name?: string | null;
   readonly link?: string | null;
@@ -38,6 +43,7 @@ export declare class APS {
   readonly Registrants?: (User | null)[] | null;
   readonly Sponsors?: (Company | null)[] | null;
   readonly year: number;
+  readonly codes?: (RegistrationCode | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<APS>);

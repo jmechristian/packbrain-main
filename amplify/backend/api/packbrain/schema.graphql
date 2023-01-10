@@ -1,3 +1,7 @@
+type RegistrationCode {
+  code: String
+}
+
 type LessonSource {
   name: String
   link: String
@@ -23,6 +27,7 @@ type APS @model @auth(rules: [{allow: public}]) {
   Registrants: [User] @hasMany(indexName: "byAPS", fields: ["id"])
   Sponsors: [Company] @hasMany(indexName: "byAPS", fields: ["id"])
   year: Int!
+  codes: [RegistrationCode]
 }
 
 type Company @model @auth(rules: [{allow: public}]) {

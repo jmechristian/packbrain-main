@@ -141,6 +141,16 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "codes": {
+                    "name": "codes",
+                    "isArray": true,
+                    "type": {
+                        "nonModel": "RegistrationCode"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
                 "createdAt": {
                     "name": "createdAt",
                     "isArray": false,
@@ -468,6 +478,18 @@ export const schema = {
         }
     },
     "nonModels": {
+        "RegistrationCode": {
+            "name": "RegistrationCode",
+            "fields": {
+                "code": {
+                    "name": "code",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        },
         "LessonSource": {
             "name": "LessonSource",
             "fields": {
@@ -488,5 +510,5 @@ export const schema = {
             }
         }
     },
-    "version": "fcb29b8197e827d9f79f86b5ca620b1b"
+    "version": "f68a101a5de4a9b585f01b4767cf570b"
 };
