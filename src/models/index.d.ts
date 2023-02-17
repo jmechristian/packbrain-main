@@ -40,8 +40,8 @@ export declare class APS {
     readOnlyFields: 'createdAt' | 'updatedAt';
   };
   readonly id: string;
-  readonly Registrants?: (User | null)[] | null;
-  readonly Sponsors?: (Company | null)[] | null;
+  readonly Registrants?: (APSUser | null)[] | null;
+  readonly Sponsors?: (APSSponsor | null)[] | null;
   readonly year: number;
   readonly codes?: (RegistrationCode | null)[] | null;
   readonly createdAt?: string | null;
@@ -63,7 +63,7 @@ export declare class User {
   readonly office?: string | null;
   readonly cell?: string | null;
   readonly companyID?: string | null;
-  readonly apsID?: string | null;
+  readonly apss?: (APSUser | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<User>);
@@ -86,9 +86,41 @@ export declare class Company {
   readonly city?: string | null;
   readonly state?: string | null;
   readonly zip?: string | null;
-  readonly apsID?: string | null;
+  readonly apsID?: (APSSponsor | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Company>);
   static copyOf(source: Company, mutator: (draft: MutableModel<Company>) => MutableModel<Company> | void): Company;
+}
+
+export declare class APSUser {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<APSUser, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly aPSId?: string | null;
+  readonly userId?: string | null;
+  readonly aps: APS;
+  readonly user: User;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<APSUser>);
+  static copyOf(source: APSUser, mutator: (draft: MutableModel<APSUser>) => MutableModel<APSUser> | void): APSUser;
+}
+
+export declare class APSSponsor {
+  readonly [__modelMeta__]: {
+    identifier: ManagedIdentifier<APSSponsor, 'id'>;
+    readOnlyFields: 'createdAt' | 'updatedAt';
+  };
+  readonly id: string;
+  readonly aPSId?: string | null;
+  readonly companyId?: string | null;
+  readonly aps: APS;
+  readonly company: Company;
+  readonly createdAt?: string | null;
+  readonly updatedAt?: string | null;
+  constructor(init: ModelInit<APSSponsor>);
+  static copyOf(source: APSSponsor, mutator: (draft: MutableModel<APSSponsor>) => MutableModel<APSSponsor> | void): APSSponsor;
 }

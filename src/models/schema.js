@@ -106,7 +106,7 @@ export const schema = {
                     "name": "Registrants",
                     "isArray": true,
                     "type": {
-                        "model": "User"
+                        "model": "APSUser"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -114,7 +114,7 @@ export const schema = {
                     "association": {
                         "connectionType": "HAS_MANY",
                         "associatedWith": [
-                            "apsID"
+                            "aps"
                         ]
                     }
                 },
@@ -122,7 +122,7 @@ export const schema = {
                     "name": "Sponsors",
                     "isArray": true,
                     "type": {
-                        "model": "Company"
+                        "model": "APSSponsor"
                     },
                     "isRequired": false,
                     "attributes": [],
@@ -130,7 +130,7 @@ export const schema = {
                     "association": {
                         "connectionType": "HAS_MANY",
                         "associatedWith": [
-                            "apsID"
+                            "aps"
                         ]
                     }
                 },
@@ -252,12 +252,21 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "apsID": {
-                    "name": "apsID",
-                    "isArray": false,
-                    "type": "ID",
+                "apss": {
+                    "name": "apss",
+                    "isArray": true,
+                    "type": {
+                        "model": "APSUser"
+                    },
                     "isRequired": false,
-                    "attributes": []
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "user"
+                        ]
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -286,18 +295,27 @@ export const schema = {
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byCompany",
+                        "name": "userByName",
                         "fields": [
-                            "companyID"
+                            "name"
                         ]
                     }
                 },
                 {
                     "type": "key",
                     "properties": {
-                        "name": "byAPS",
+                        "name": "userByEmail",
                         "fields": [
-                            "apsID"
+                            "email"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byCompany",
+                        "fields": [
+                            "companyID"
                         ]
                     }
                 },
@@ -410,10 +428,19 @@ export const schema = {
                 },
                 "apsID": {
                     "name": "apsID",
-                    "isArray": false,
-                    "type": "ID",
+                    "isArray": true,
+                    "type": {
+                        "model": "APSSponsor"
+                    },
                     "isRequired": false,
-                    "attributes": []
+                    "attributes": [],
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "company"
+                        ]
+                    }
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -440,15 +467,6 @@ export const schema = {
                     "properties": {}
                 },
                 {
-                    "type": "key",
-                    "properties": {
-                        "name": "byAPS",
-                        "fields": [
-                            "apsID"
-                        ]
-                    }
-                },
-                {
                     "type": "auth",
                     "properties": {
                         "rules": [
@@ -461,6 +479,202 @@ export const schema = {
                                     "read"
                                 ]
                             }
+                        ]
+                    }
+                }
+            ]
+        },
+        "APSUser": {
+            "name": "APSUser",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "aPSId": {
+                    "name": "aPSId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "userId": {
+                    "name": "userId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "aps": {
+                    "name": "aps",
+                    "isArray": false,
+                    "type": {
+                        "model": "APS"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "aPSId"
+                        ]
+                    }
+                },
+                "user": {
+                    "name": "user",
+                    "isArray": false,
+                    "type": {
+                        "model": "User"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "userId"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "APSUsers",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byAPS",
+                        "fields": [
+                            "aPSId"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byUser",
+                        "fields": [
+                            "userId"
+                        ]
+                    }
+                }
+            ]
+        },
+        "APSSponsor": {
+            "name": "APSSponsor",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "aPSId": {
+                    "name": "aPSId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "companyId": {
+                    "name": "companyId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "aps": {
+                    "name": "aps",
+                    "isArray": false,
+                    "type": {
+                        "model": "APS"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "aPSId"
+                        ]
+                    }
+                },
+                "company": {
+                    "name": "company",
+                    "isArray": false,
+                    "type": {
+                        "model": "Company"
+                    },
+                    "isRequired": true,
+                    "attributes": [],
+                    "association": {
+                        "connectionType": "BELONGS_TO",
+                        "targetNames": [
+                            "companyId"
+                        ]
+                    }
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "APSSponsors",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byAPS",
+                        "fields": [
+                            "aPSId"
+                        ]
+                    }
+                },
+                {
+                    "type": "key",
+                    "properties": {
+                        "name": "byCompany",
+                        "fields": [
+                            "companyId"
                         ]
                     }
                 }
@@ -510,5 +724,5 @@ export const schema = {
             }
         }
     },
-    "version": "f68a101a5de4a9b585f01b4767cf570b"
+    "version": "9da6fa1dbc11267f3906e576a2b30fb7"
 };
