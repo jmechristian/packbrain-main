@@ -17,6 +17,13 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
+                "subhead": {
+                    "name": "subhead",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "type": {
                     "name": "type",
                     "isArray": false,
@@ -46,6 +53,24 @@ export const schema = {
                     "type": {
                         "nonModel": "LessonSource"
                     },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "links": {
+                    "name": "links",
+                    "isArray": true,
+                    "type": {
+                        "nonModel": "LessonLink"
+                    },
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "tags": {
+                    "name": "tags",
+                    "isArray": true,
+                    "type": "String",
                     "isRequired": false,
                     "attributes": [],
                     "isArrayNullable": true
@@ -892,6 +917,25 @@ export const schema = {
                 }
             }
         },
+        "LessonLink": {
+            "name": "LessonLink",
+            "fields": {
+                "name": {
+                    "name": "name",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "link": {
+                    "name": "link",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        },
         "RegistrationCode": {
             "name": "RegistrationCode",
             "fields": {
@@ -905,5 +949,5 @@ export const schema = {
             }
         }
     },
-    "version": "9f8c0d6ffe2af0625a48c1ae765435a6"
+    "version": "ee1ad0d1e315ed00782e2ab174042983"
 };

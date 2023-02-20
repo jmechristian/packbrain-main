@@ -12,6 +12,12 @@ export declare class LessonSource {
   constructor(init: ModelInit<LessonSource>);
 }
 
+export declare class LessonLink {
+  readonly name?: string | null;
+  readonly link?: string | null;
+  constructor(init: ModelInit<LessonLink>);
+}
+
 export declare class RegistrationCode {
   readonly code?: string | null;
   constructor(init: ModelInit<RegistrationCode>);
@@ -24,10 +30,13 @@ export declare class Lesson {
   };
   readonly id: string;
   readonly title: string;
+  readonly subhead?: string | null;
   readonly type?: ModuleType | keyof typeof ModuleType | null;
   readonly media: string;
   readonly content?: string | null;
   readonly sources?: (LessonSource | null)[] | null;
+  readonly links?: (LessonLink | null)[] | null;
+  readonly tags?: (string | null)[] | null;
   readonly createdAt?: string | null;
   readonly updatedAt?: string | null;
   constructor(init: ModelInit<Lesson>);
