@@ -1,13 +1,20 @@
 # Library
 
-type LessonSource {
+type LessonSource @model @auth(rules: [{ allow: public }]) {
+  id: ID!
   name: String
   link: String
 }
 
-type LessonLink {
+type LessonLink @model @auth(rules: [{ allow: public }]) {
+  id: ID!
   name: String
   link: String
+}
+
+type Tags @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  tag: String!
 }
 
 enum ModuleType {
@@ -21,11 +28,11 @@ type Lesson @model @auth(rules: [{ allow: public }]) {
   title: String!
   subhead: String
   type: ModuleType
-  media: String!
+  media: String
   content: String
-  sources: [LessonSource]
-  links: [LessonLink]
-  tags: [String]
+  sources: [LessonSource] @hasMany
+  links: [LessonLink] @hasMany
+  tags: [Tags] @hasMany
 }
 
 # Autopack Summit

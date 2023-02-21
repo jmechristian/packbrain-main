@@ -268,15 +268,15 @@ const Dashboard = () => {
 
           <main className='flex-1'>
             <div className='py-6'>
-              <div className='mx-auto max-w-7xl px-4 sm:px-6 md:px-8'>
-                <h1 className='text-2xl font-semibold text-gray-900'>
+              <div className='mx-auto max-w-5xl px-4 sm:px-6 md:px-8'>
+                <h1 className='text-2xl font-semibold text-gray-900 mb-4'>
                   Create Lesson
                 </h1>
               </div>
-              <div className='mx-auto max-w-7xl px-4 sm:px-6 md:px-8'>
-                {/* Replace with your content */}
-                <RichTextEditor />
-                {/* /End replace */}
+              <div className='mx-auto max-w-5xl px-4 sm:px-6 md:px-8'>
+                <div>
+                  <RichTextEditor />
+                </div>
               </div>
             </div>
           </main>
