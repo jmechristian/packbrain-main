@@ -12,12 +12,7 @@
       "AmplifyAppId": "d3erwqq9qelccz"
     },
     "categories": {
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d3erwqq9qelccz",
-          "type": "cicd"
-        }
-      },
+      "hosting": {},
       "auth": {
         "packbrain": {}
       },

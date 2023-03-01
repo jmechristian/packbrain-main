@@ -117,12 +117,7 @@
             "service": "Lambda"
         }
     },
-    "hosting": {
-        "amplifyhosting": {
-            "service": "amplifyhosting",
-            "type": "cicd"
-        }
-    },
+    "hosting": {},
     "notifications": {
         "autopacksummit": {
             "service": "Pinpoint",
@@ -249,22 +244,6 @@
                 {
                     "category": "function",
                     "resourceName": "sendWelcomeEmail"
-                }
-            ]
-        },
-        "AMPLIFY_hosting_amplifyhosting_appId": {
-            "usedBy": [
-                {
-                    "category": "hosting",
-                    "resourceName": "amplifyhosting"
-                }
-            ]
-        },
-        "AMPLIFY_hosting_amplifyhosting_type": {
-            "usedBy": [
-                {
-                    "category": "hosting",
-                    "resourceName": "amplifyhosting"
                 }
             ]
         },

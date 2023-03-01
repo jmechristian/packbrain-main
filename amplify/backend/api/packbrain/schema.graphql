@@ -1,9 +1,8 @@
-# Library
-
 type LessonSource @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String
   link: String
+  position: Int!
 }
 
 type LessonLink @model @auth(rules: [{ allow: public }]) {
@@ -25,14 +24,55 @@ enum ModuleType {
 
 type Lesson @model @auth(rules: [{ allow: public }]) {
   id: ID!
+  slug: String! @index(name: "lessonsByTitle")
   title: String!
   subhead: String
   type: ModuleType
   media: String
+  seoImage: String
   content: String
   sources: [LessonSource] @hasMany
   links: [LessonLink] @hasMany
   tags: [Tags] @hasMany
+  objectives: [String]
+  actionCTA: String
+  actionSubhead: String
+  actionLink: String
+  actionLinkTitle: String
+  actionExample: String
+}
+
+type Blog @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  slug: String! @index(name: "blogBySlug")
+  title: String!
+  media: String
+  content: String!
+  author: String
+  tags: [String]
+  date: String
+}
+
+type Course @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  slug: String! @index(name: "courseBySlug")
+  title: String!
+  subhead: String
+  media: String
+  video: String
+  articles: [Article] @manyToMany(relationName: "ArticleRelatedCourses")
+}
+
+type Article @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  slug: String! @index(name: "aticlesByTitle")
+  title: String!
+  subhead: String
+  media: String
+  seoImage: String
+  content: String
+  tags: [Tags] @hasMany
+  relatedCourses: [Course] @manyToMany(relationName: "ArticleRelatedCourses")
 }
 
 # Autopack Summit
@@ -49,7 +89,7 @@ type APS @model @auth(rules: [{ allow: public }]) {
 type Company @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String!
-  Employees: [User] @hasMany(indexName: "byCompany", fields: ["id"])
+  Employees: [User] @hasMany(indexName: "userByCompany", fields: ["id"])
   website: String
   email: String
   phone: String
@@ -69,7 +109,7 @@ type User @model @auth(rules: [{ allow: public }]) {
   email: String @index(name: "userByEmail")
   office: String
   cell: String
-  companyID: ID @index(name: "byCompany")
+  companyID: ID @index(name: "userByCompany")
   apss: [APS] @manyToMany(relationName: "APSUser")
 }
 

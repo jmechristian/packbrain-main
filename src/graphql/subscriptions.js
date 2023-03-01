@@ -7,6 +7,7 @@ export const onCreateLessonSource = /* GraphQL */ `
       id
       name
       link
+      position
       createdAt
       updatedAt
       _version
@@ -22,6 +23,7 @@ export const onUpdateLessonSource = /* GraphQL */ `
       id
       name
       link
+      position
       createdAt
       updatedAt
       _version
@@ -37,6 +39,7 @@ export const onDeleteLessonSource = /* GraphQL */ `
       id
       name
       link
+      position
       createdAt
       updatedAt
       _version
@@ -102,6 +105,7 @@ export const onCreateTags = /* GraphQL */ `
       _deleted
       _lastChangedAt
       lessonTagsId
+      articleTagsId
     }
   }
 `;
@@ -116,6 +120,7 @@ export const onUpdateTags = /* GraphQL */ `
       _deleted
       _lastChangedAt
       lessonTagsId
+      articleTagsId
     }
   }
 `;
@@ -130,6 +135,7 @@ export const onDeleteTags = /* GraphQL */ `
       _deleted
       _lastChangedAt
       lessonTagsId
+      articleTagsId
     }
   }
 `;
@@ -137,16 +143,19 @@ export const onCreateLesson = /* GraphQL */ `
   subscription OnCreateLesson {
     onCreateLesson {
       id
+      slug
       title
       subhead
       type
       media
+      seoImage
       content
       sources {
         items {
           id
           name
           link
+          position
           createdAt
           updatedAt
           _version
@@ -182,10 +191,17 @@ export const onCreateLesson = /* GraphQL */ `
           _deleted
           _lastChangedAt
           lessonTagsId
+          articleTagsId
         }
         nextToken
         startedAt
       }
+      objectives
+      actionCTA
+      actionSubhead
+      actionLink
+      actionLinkTitle
+      actionExample
       createdAt
       updatedAt
       _version
@@ -198,16 +214,19 @@ export const onUpdateLesson = /* GraphQL */ `
   subscription OnUpdateLesson {
     onUpdateLesson {
       id
+      slug
       title
       subhead
       type
       media
+      seoImage
       content
       sources {
         items {
           id
           name
           link
+          position
           createdAt
           updatedAt
           _version
@@ -243,10 +262,17 @@ export const onUpdateLesson = /* GraphQL */ `
           _deleted
           _lastChangedAt
           lessonTagsId
+          articleTagsId
         }
         nextToken
         startedAt
       }
+      objectives
+      actionCTA
+      actionSubhead
+      actionLink
+      actionLinkTitle
+      actionExample
       createdAt
       updatedAt
       _version
@@ -259,16 +285,19 @@ export const onDeleteLesson = /* GraphQL */ `
   subscription OnDeleteLesson {
     onDeleteLesson {
       id
+      slug
       title
       subhead
       type
       media
+      seoImage
       content
       sources {
         items {
           id
           name
           link
+          position
           createdAt
           updatedAt
           _version
@@ -304,6 +333,304 @@ export const onDeleteLesson = /* GraphQL */ `
           _deleted
           _lastChangedAt
           lessonTagsId
+          articleTagsId
+        }
+        nextToken
+        startedAt
+      }
+      objectives
+      actionCTA
+      actionSubhead
+      actionLink
+      actionLinkTitle
+      actionExample
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateBlog = /* GraphQL */ `
+  subscription OnCreateBlog {
+    onCreateBlog {
+      id
+      slug
+      title
+      media
+      content
+      author
+      tags
+      date
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateBlog = /* GraphQL */ `
+  subscription OnUpdateBlog {
+    onUpdateBlog {
+      id
+      slug
+      title
+      media
+      content
+      author
+      tags
+      date
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteBlog = /* GraphQL */ `
+  subscription OnDeleteBlog {
+    onDeleteBlog {
+      id
+      slug
+      title
+      media
+      content
+      author
+      tags
+      date
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateCourse = /* GraphQL */ `
+  subscription OnCreateCourse {
+    onCreateCourse {
+      id
+      slug
+      title
+      subhead
+      media
+      video
+      articles {
+        items {
+          id
+          courseId
+          articleId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateCourse = /* GraphQL */ `
+  subscription OnUpdateCourse {
+    onUpdateCourse {
+      id
+      slug
+      title
+      subhead
+      media
+      video
+      articles {
+        items {
+          id
+          courseId
+          articleId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteCourse = /* GraphQL */ `
+  subscription OnDeleteCourse {
+    onDeleteCourse {
+      id
+      slug
+      title
+      subhead
+      media
+      video
+      articles {
+        items {
+          id
+          courseId
+          articleId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onCreateArticle = /* GraphQL */ `
+  subscription OnCreateArticle {
+    onCreateArticle {
+      id
+      slug
+      title
+      subhead
+      media
+      seoImage
+      content
+      tags {
+        items {
+          id
+          tag
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          lessonTagsId
+          articleTagsId
+        }
+        nextToken
+        startedAt
+      }
+      relatedCourses {
+        items {
+          id
+          courseId
+          articleId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateArticle = /* GraphQL */ `
+  subscription OnUpdateArticle {
+    onUpdateArticle {
+      id
+      slug
+      title
+      subhead
+      media
+      seoImage
+      content
+      tags {
+        items {
+          id
+          tag
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          lessonTagsId
+          articleTagsId
+        }
+        nextToken
+        startedAt
+      }
+      relatedCourses {
+        items {
+          id
+          courseId
+          articleId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+        }
+        nextToken
+        startedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteArticle = /* GraphQL */ `
+  subscription OnDeleteArticle {
+    onDeleteArticle {
+      id
+      slug
+      title
+      subhead
+      media
+      seoImage
+      content
+      tags {
+        items {
+          id
+          tag
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          lessonTagsId
+          articleTagsId
+        }
+        nextToken
+        startedAt
+      }
+      relatedCourses {
+        items {
+          id
+          courseId
+          articleId
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
         }
         nextToken
         startedAt
@@ -934,6 +1261,165 @@ export const onDeleteAPSSpeaker = /* GraphQL */ `
       _deleted
       _lastChangedAt
       aPSSpeakersId
+    }
+  }
+`;
+export const onCreateArticleRelatedCourses = /* GraphQL */ `
+  subscription OnCreateArticleRelatedCourses {
+    onCreateArticleRelatedCourses {
+      id
+      courseId
+      articleId
+      course {
+        id
+        slug
+        title
+        subhead
+        media
+        video
+        articles {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      article {
+        id
+        slug
+        title
+        subhead
+        media
+        seoImage
+        content
+        tags {
+          nextToken
+          startedAt
+        }
+        relatedCourses {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onUpdateArticleRelatedCourses = /* GraphQL */ `
+  subscription OnUpdateArticleRelatedCourses {
+    onUpdateArticleRelatedCourses {
+      id
+      courseId
+      articleId
+      course {
+        id
+        slug
+        title
+        subhead
+        media
+        video
+        articles {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      article {
+        id
+        slug
+        title
+        subhead
+        media
+        seoImage
+        content
+        tags {
+          nextToken
+          startedAt
+        }
+        relatedCourses {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
+    }
+  }
+`;
+export const onDeleteArticleRelatedCourses = /* GraphQL */ `
+  subscription OnDeleteArticleRelatedCourses {
+    onDeleteArticleRelatedCourses {
+      id
+      courseId
+      articleId
+      course {
+        id
+        slug
+        title
+        subhead
+        media
+        video
+        articles {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      article {
+        id
+        slug
+        title
+        subhead
+        media
+        seoImage
+        content
+        tags {
+          nextToken
+          startedAt
+        }
+        relatedCourses {
+          nextToken
+          startedAt
+        }
+        createdAt
+        updatedAt
+        _version
+        _deleted
+        _lastChangedAt
+      }
+      createdAt
+      updatedAt
+      _version
+      _deleted
+      _lastChangedAt
     }
   }
 `;
