@@ -149,6 +149,7 @@ export const getTags = /* GraphQL */ `
       _deleted
       _lastChangedAt
       lessonTagsId
+      blogTagsId
       articleTagsId
     }
   }
@@ -169,6 +170,7 @@ export const listTags = /* GraphQL */ `
         _deleted
         _lastChangedAt
         lessonTagsId
+        blogTagsId
         articleTagsId
       }
       nextToken
@@ -198,6 +200,7 @@ export const syncTags = /* GraphQL */ `
         _deleted
         _lastChangedAt
         lessonTagsId
+        blogTagsId
         articleTagsId
       }
       nextToken
@@ -257,6 +260,7 @@ export const getLesson = /* GraphQL */ `
           _deleted
           _lastChangedAt
           lessonTagsId
+          blogTagsId
           articleTagsId
         }
         nextToken
@@ -434,7 +438,22 @@ export const getBlog = /* GraphQL */ `
       media
       content
       author
-      tags
+      tags {
+        items {
+          id
+          tag
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          lessonTagsId
+          blogTagsId
+          articleTagsId
+        }
+        nextToken
+        startedAt
+      }
       date
       createdAt
       updatedAt
@@ -458,7 +477,10 @@ export const listBlogs = /* GraphQL */ `
         media
         content
         author
-        tags
+        tags {
+          nextToken
+          startedAt
+        }
         date
         createdAt
         updatedAt
@@ -491,7 +513,10 @@ export const syncBlogs = /* GraphQL */ `
         media
         content
         author
-        tags
+        tags {
+          nextToken
+          startedAt
+        }
         date
         createdAt
         updatedAt
@@ -526,7 +551,10 @@ export const blogsBySlug = /* GraphQL */ `
         media
         content
         author
-        tags
+        tags {
+          nextToken
+          startedAt
+        }
         date
         createdAt
         updatedAt
@@ -691,6 +719,7 @@ export const getArticle = /* GraphQL */ `
           _deleted
           _lastChangedAt
           lessonTagsId
+          blogTagsId
           articleTagsId
         }
         nextToken

@@ -126,6 +126,7 @@ export const createTags = /* GraphQL */ `
       _deleted
       _lastChangedAt
       lessonTagsId
+      blogTagsId
       articleTagsId
     }
   }
@@ -144,6 +145,7 @@ export const updateTags = /* GraphQL */ `
       _deleted
       _lastChangedAt
       lessonTagsId
+      blogTagsId
       articleTagsId
     }
   }
@@ -162,6 +164,7 @@ export const deleteTags = /* GraphQL */ `
       _deleted
       _lastChangedAt
       lessonTagsId
+      blogTagsId
       articleTagsId
     }
   }
@@ -221,6 +224,7 @@ export const createLesson = /* GraphQL */ `
           _deleted
           _lastChangedAt
           lessonTagsId
+          blogTagsId
           articleTagsId
         }
         nextToken
@@ -295,6 +299,7 @@ export const updateLesson = /* GraphQL */ `
           _deleted
           _lastChangedAt
           lessonTagsId
+          blogTagsId
           articleTagsId
         }
         nextToken
@@ -369,6 +374,7 @@ export const deleteLesson = /* GraphQL */ `
           _deleted
           _lastChangedAt
           lessonTagsId
+          blogTagsId
           articleTagsId
         }
         nextToken
@@ -400,7 +406,22 @@ export const createBlog = /* GraphQL */ `
       media
       content
       author
-      tags
+      tags {
+        items {
+          id
+          tag
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          lessonTagsId
+          blogTagsId
+          articleTagsId
+        }
+        nextToken
+        startedAt
+      }
       date
       createdAt
       updatedAt
@@ -422,7 +443,22 @@ export const updateBlog = /* GraphQL */ `
       media
       content
       author
-      tags
+      tags {
+        items {
+          id
+          tag
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          lessonTagsId
+          blogTagsId
+          articleTagsId
+        }
+        nextToken
+        startedAt
+      }
       date
       createdAt
       updatedAt
@@ -444,7 +480,22 @@ export const deleteBlog = /* GraphQL */ `
       media
       content
       author
-      tags
+      tags {
+        items {
+          id
+          tag
+          createdAt
+          updatedAt
+          _version
+          _deleted
+          _lastChangedAt
+          lessonTagsId
+          blogTagsId
+          articleTagsId
+        }
+        nextToken
+        startedAt
+      }
       date
       createdAt
       updatedAt
@@ -579,6 +630,7 @@ export const createArticle = /* GraphQL */ `
           _deleted
           _lastChangedAt
           lessonTagsId
+          blogTagsId
           articleTagsId
         }
         nextToken
@@ -629,6 +681,7 @@ export const updateArticle = /* GraphQL */ `
           _deleted
           _lastChangedAt
           lessonTagsId
+          blogTagsId
           articleTagsId
         }
         nextToken
@@ -679,6 +732,7 @@ export const deleteArticle = /* GraphQL */ `
           _deleted
           _lastChangedAt
           lessonTagsId
+          blogTagsId
           articleTagsId
         }
         nextToken

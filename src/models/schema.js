@@ -193,6 +193,13 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
+                "blogTagsId": {
+                    "name": "blogTagsId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
                 "articleTagsId": {
                     "name": "articleTagsId",
                     "isArray": false,
@@ -477,10 +484,18 @@ export const schema = {
                 "tags": {
                     "name": "tags",
                     "isArray": true,
-                    "type": "String",
+                    "type": {
+                        "model": "Tags"
+                    },
                     "isRequired": false,
                     "attributes": [],
-                    "isArrayNullable": true
+                    "isArrayNullable": true,
+                    "association": {
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": [
+                            "blogTagsId"
+                        ]
+                    }
                 },
                 "date": {
                     "name": "date",
@@ -1679,5 +1694,5 @@ export const schema = {
             }
         }
     },
-    "version": "5921323a917827e7ff6baf2602ed374d"
+    "version": "0d2529287bdfcdcf668a1cef72cca4e8"
 };
