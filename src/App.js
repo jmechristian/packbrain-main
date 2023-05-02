@@ -1,6 +1,5 @@
 import React from 'react';
 import { Amplify } from 'aws-amplify';
-import { withAuthenticator } from '@aws-amplify/ui-react';
 import '@aws-amplify/ui-react/styles.css';
 
 import Dashboard from './components/dashboard/Dashboard';
@@ -8,7 +7,7 @@ import Dashboard from './components/dashboard/Dashboard';
 import awsExports from './aws-exports';
 Amplify.configure(awsExports);
 
-function App({ signOut, user }) {
+function App() {
   return (
     <>
       <Dashboard />
@@ -16,4 +15,4 @@ function App({ signOut, user }) {
   );
 }
 
-export default withAuthenticator(App);
+export default App;

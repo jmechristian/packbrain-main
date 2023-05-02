@@ -1,10 +1,4 @@
 {
-    "analytics": {
-        "autopacksummit": {
-            "providerPlugin": "awscloudformation",
-            "service": "Pinpoint"
-        }
-    },
     "api": {
         "packbrain": {
             "dependsOn": [],
@@ -49,9 +43,7 @@
                 "signupAttributes": [
                     "EMAIL"
                 ],
-                "socialProviders": [
-                    "GOOGLE"
-                ],
+                "socialProviders": [],
                 "usernameAttributes": [
                     "EMAIL"
                 ],
@@ -121,9 +113,7 @@
     "notifications": {
         "autopacksummit": {
             "service": "Pinpoint",
-            "channels": [
-                "Email"
-            ]
+            "channels": []
         }
     },
     "parameters": {

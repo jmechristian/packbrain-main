@@ -31,6 +31,12 @@ enum CategoryType {
   DESIGN
 }
 
+enum MediaType {
+  VIDEO
+  IMAGE
+  SLIDES
+}
+
 type Certificate @model @searchable @auth(rules: [{ allow: public }]) {
   id: ID!
   slug: String! @index(name: "certificateByTitle")
@@ -44,6 +50,17 @@ type Certificate @model @searchable @auth(rules: [{ allow: public }]) {
   title_button_2_link: String
   title_image: String
   courses: [Course] @manyToMany(relationName: "CertificateCourses")
+  whoText: String
+  courses_total: Int
+  hours_total: Int
+  ceus_total: Int
+  brochure_link: String
+  video: String
+  price_full: Int
+  price_monthly: Int
+  price_features: [String]
+  lmsLink: String
+  demoLink: String
 }
 
 type Course @model @searchable @auth(rules: [{ allow: public }]) {
@@ -69,6 +86,8 @@ type Lesson @model @auth(rules: [{ allow: public }]) {
   subhead: String
   type: ModuleType
   media: String
+  mediaType: MediaType
+  slides: [String]
   seoImage: String
   content: String
   sources: [LessonSource] @hasMany
@@ -155,16 +174,52 @@ type Company @model @auth(rules: [{ allow: public }]) {
   apsID: [APS] @manyToMany(relationName: "APSSponsor")
 }
 
+# User //////////
+
 type User @model @auth(rules: [{ allow: public }]) {
   id: ID!
   name: String! @index(name: "userByName")
-  title: String!
+  title: String
   company: String
-  email: String @index(name: "userByEmail")
+  email: String! @index(name: "userByEmail")
   office: String
   cell: String
+  picture: String
+  linkedin: String
   companyID: ID @index(name: "userByCompany")
   apss: [APS] @manyToMany(relationName: "APSUser")
+  cmpmFormID: ID
+  cmpmForm: CMPMForm @hasOne(fields: ["cmpmFormID"])
+  instructorId: Instructor @hasOne
+  studentId: Student @hasOne
+}
+
+type CMPMForm
+  @model(timestamps: { createdAt: "createdOn", updatedAt: "updatedOn" })
+  @auth(rules: [{ allow: public }]) {
+  id: ID!
+  user: User! @belongsTo
+  firstName: String
+  lastName: String
+  email: String! @index(name: "cmpmByEmail")
+  phone: String
+  streetAddress: String
+  addressExtra: String
+  city: String
+  state: String
+  country: String
+  companyName: String
+  companyTitle: String
+  linkedin: String
+  background: String
+  whyPackaging: String
+  areaOfInterest: String
+  sessionApplying: String
+  referral: String
+  payment: String
+  yearGoals: String
+  cmpmGoals: String
+  moreAboutYou: String
 }
 
 type APSSpeaker @model @auth(rules: [{ allow: public }]) {
@@ -186,4 +241,77 @@ type APSSpeaker @model @auth(rules: [{ allow: public }]) {
 
 type RegistrationCode {
   code: String
+}
+
+######### LMS #########
+
+type LMSCirriculum @model @searchable @auth(rules: [{ allow: public }]) {
+  id: ID!
+  title: String
+  Courses: [LMSCourse] @manyToMany(relationName: "CirriculumCourses")
+}
+
+type LMSCourse @model @searchable @auth(rules: [{ allow: public }]) {
+  id: ID!
+  courseId: String
+  Cirriculum: [LMSCirriculum] @manyToMany(relationName: "CirriculumCourses")
+  Lessons: [LMSLesson] @manyToMany(relationName: "CourseLessons")
+  Instructors: [Instructor] @manyToMany(relationName: "CourseInstructors")
+  price: Int
+  hours: Int
+  videos: Int
+  seoImage: String
+  description: String
+  percentComplete: Int
+}
+
+type LMSLesson @model @searchable @auth(rules: [{ allow: public }]) {
+  id: ID!
+  title: String
+  Course: [LMSCourse] @manyToMany(relationName: "CourseLessons")
+  subheadline: String
+  objectives: [Objective] @hasMany
+  mediaType: MediaType
+  slides: [Slide] @hasMany
+  video: LessonVideo @hasOne
+  percentComplete: Int
+}
+
+type Student @model @searchable @auth(rules: [{ allow: public }]) {
+  id: ID!
+  studentId: ID
+  student: User @belongsTo(fields: ["studentId"])
+  courseEnrolled: [LMSCourse] @hasMany
+}
+
+type Instructor @model @searchable @auth(rules: [{ allow: public }]) {
+  id: ID!
+  userId: ID
+  instructor: User! @belongsTo(fields: ["userId"])
+  coursesTaught: [LMSCourse] @manyToMany(relationName: "CourseInstructors")
+}
+
+type Objective @model @searchable @auth(rules: [{ allow: public }]) {
+  id: ID!
+  objective: String!
+  completed: Boolean
+}
+
+type Slide @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  slideSource: String!
+  description: String
+}
+
+type LessonVideo @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  timestamps: [Timestamp] @hasMany
+  lessonId: ID
+  lesson: LMSLesson @belongsTo(fields: ["lessonId"])
+}
+
+type Timestamp @model @auth(rules: [{ allow: public }]) {
+  id: ID!
+  time: String!
+  description: String
 }
